@@ -33,6 +33,7 @@ $(document).ready(function(){
         //-----------------------------------------------------------------------------------------------//
         //pull the data; start by looping all the gifs; a <div class="col"> will be constructed for each gif
         for(var i = 0; i < response.data.length; i++){
+            var gifHolder = $("<div>").addClass("col-sm");//.addClass("col-sm").addClass("gif")//.attr("width: 200","padding:20");
             var pull = response.data[i];
             //pull the title
             var gTitle = pull.title;
@@ -41,12 +42,20 @@ $(document).ready(function(){
             var gRating = pull.rating;
             console.log(gRating);
             //pull the fixed_width_still url of each record (each gif has fixed width of 200px yet varying heights)
-            var gStill = pull.images.fixed_width_still;
+            var gStill = pull.images.fixed_width_still.url;
             console.log(gStill);
             //pull the animated version
-            var gAnimated = pull.images.fixed_width;
+            var gAnimated = pull.images.fixed_width.url;
             console.log(gAnimated);
             //now build the col with the pulled content
+            //lock col width and padding down to 220px + 20px padding 
+            //make an img tag with src= to the gif url
+            var gif = $("<img>").attr("src", gStill);
+            //put the gif into the column
+            $(gifHolder).append(gif);
+            //put the column into the row #display
+            $("#display").append(gifHolder);
+            
         }
        
         

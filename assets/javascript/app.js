@@ -33,9 +33,13 @@ $(document).ready(function(){
         //-----------------------------------------------------------------------------------------------//
         //pull the data; start by looping all the gifs; a <div class="col"> will be constructed for each gif
         for(var i = 0; i < response.data.length; i++){
+            var pull = response.data[i];
             //pull the title
-        var gTitle = response.data[i].title;
-        console.log(gTitle);
+            var gTitle = pull.title;
+            console.log(gTitle);
+            //pull the rating of the gif
+            var gRating = pull.rating;
+            console.log(gRating);
         }
        
         

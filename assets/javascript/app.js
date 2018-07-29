@@ -30,6 +30,14 @@ $(document).ready(function(){
         //this will generate 2 gifs per line on the smallest window size of 576 given the aside will be atleast 100px
         //on larger sizes more gifs will fit per line. The gifs are rendered in a single hardcoded row of responsive width and will
         //auto wrap to a new line as the surpas their aloted width out of the 12 max
+        //-----------------------------------------------------------------------------------------------//
+        //pull the data; start by looping all the gifs; a <div class="col"> will be constructed for each gif
+        for(var i = 0; i < response.data.length; i++){
+            //pull the title
+        var gTitle = response.data[i].title;
+        console.log(gTitle);
+        }
+       
         
     });
 

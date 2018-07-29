@@ -40,6 +40,13 @@ $(document).ready(function(){
             //pull the rating of the gif
             var gRating = pull.rating;
             console.log(gRating);
+            //pull the fixed_width_still url of each record (each gif has fixed width of 200px yet varying heights)
+            var gStill = pull.images.fixed_width_still;
+            console.log(gStill);
+            //pull the animated version
+            var gAnimated = pull.images.fixed_width;
+            console.log(gAnimated);
+            //now build the col with the pulled content
         }
        
         

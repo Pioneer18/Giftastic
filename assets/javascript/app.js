@@ -33,7 +33,9 @@ $(document).ready(function(){
         //-----------------------------------------------------------------------------------------------//
         //pull the data; start by looping all the gifs; a <div class="col"> will be constructed for each gif
         for(var i = 0; i < response.data.length; i++){
-            var gifHolder = $("<div>").addClass("col-sm");//.addClass("col-sm").addClass("gif")//.attr("width: 200","padding:20");
+            //make the column to hold the gif images
+            var gifHolder = $("<div>").addClass("col-sm");
+            //make a variable to hold the basic dig into the api object(less code to type on each following variable)
             var pull = response.data[i];
             //pull the title
             var gTitle = pull.title;
@@ -49,15 +51,14 @@ $(document).ready(function(){
             console.log(gAnimated);
             //now build the col with the pulled content
             //lock col width and padding down to 220px + 20px padding 
-            //make an img tag with src= to the gif url
-            var gif = $("<img>").attr("src", gStill);
+            //make an img tag with src= to the gif url and .gif to be target by an onclick function
+            var gif = $("<img>").attr({src:gStill,"data-animated":gAnimated,"data-still":gStill}).addClass(".gif");
             //put the gif into the column
             $(gifHolder).append(gif);
             //put the column into the row #display
             $("#display").append(gifHolder);
-            
         }
-       
+        //build an onclick selector to make the gifs animate or stop when clicked on
         
     });
 

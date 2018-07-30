@@ -1,9 +1,36 @@
 /*time to add some sweet styles to this giphy situation*/
 #search-box{
     background:#5cdb95;
+    background:#edf5e1;
+    padding-left:10px;
+    font-family:'Indie Flower', cursive;
+    font-family: 'Kirang Haerang', cursive;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+#search-box::placeholder{
+    color:#379683;
 }
 
 header{
     background:#05386b;
 }
+.gif-button{
+    border-radius: 10px;
+    background:#5cdb95;
+}
+#add-gif{
+    border-radius:1px;
+    font-family: 'Do Hyeon', sans-serif;
+    background: #379683;
+    color:#fff;
+}
 
+.navbar-brand{
+    /*font-family:'Hanalei Fill', cursive;*/
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+body{
+    background:#fff;
+}

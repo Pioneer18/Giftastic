@@ -5,21 +5,46 @@ $(document).ready(function(){
     var url = "http://api.giphy.com/v1/gifs/search?";
     //the api key is unique to my app; Giftastic (this is global and not to be selected by the user)
     var apiKey = "api_key=G1kFHGB32srmgFFlZw45yLkE1H0HFmuy";
-
     //will be bound to the data-name attribute of the clicked button
     var searchTerm;
     //the other global parameters that will be selectable by the user
     var _limit;
     var _rating;
     var _language;
+    //make a search bar (input)
+    var searchBar = $("<input>").attr({type:"text",placeholder:"search for gifs",name:"gif-search-box",id:"search-box"}).addClass("col-sm-6");
+    $("#search-spot").append(searchBar);
 
     //make an array to hold the topics ('strings') to be passed to the ajax queryURL
     var topics = ["cats","space","coding","coffe","dogs","sloth","adventure time"];
-    //loop through the topics and generate the buttons that will make the ajax calls
-    for(let i =0; i < topics.length; i++){
-        var gifButton = $("<button>").attr("data-name", topics[i]).addClass("gif-button").text(topics[i]);
-        $("#button-spot").append(gifButton);
+
+    //make the function to render buttons from the items in the topics array
+    function renderButtons () {
+        //Don't forget to delete the gif buttons before adding new buttons or there will be repeated buttons
+        $("#button-spot").empty();
+        // Now loop through the topics and generate the buttons that will make the ajax calls
+        for(let i =0; i < topics.length; i++){
+            var gifButton = $("<button>").attr("data-name", topics[i]).addClass("gif-button").text(topics[i]);
+            $("#button-spot").append(gifButton);
+        }
     }
+
+    //function to grab user input and add it as a topic in the topics array
+    //the user can press enter or they will click the `add gif category` button
+    $("#add-gif").on("click",function(){
+        //remeber to add the event.preventDefault() function to prevent the form from trying to submit itself
+        event.preventDefault();
+        //make a variable called topic to bind to the user input value and then trim() the extra whitespace from the
+        //start and end of the inputed string
+        var topic = $("#search-box").val().trim();
+        console.log(topic);
+        //push this value to the topic array
+        topics.push(topic);
+        //call the functon to create the new gif button and add it to the button spot
+        console.log(topics);
+        renderButtons();
+    });
+    
 
     //make an onclick event for the class of .gif-button that will bind the api query parameters to the queryURL
     //to the data-name value of the clicked button
@@ -55,7 +80,7 @@ $(document).ready(function(){
             //pull the data; start by looping all the gifs; a <div class="col"> will be constructed for each gif
             for(var i = 0; i < response.data.length; i++){
                 //make the column to hold the gif images
-                var gifHolder = $("<div>").addClass("col-sm-8");
+                var gifHolder = $("<div>").addClass("col-sm");
                 //make a variable to hold the basic dig into the api object(less code to type on each following variable)
                 var pull = response.data[i];
                 //pull the title
@@ -101,5 +126,8 @@ $(document).ready(function(){
 
         });//end ajax query
     }//end ajaxCall function
+
+    //call render buttons from the start so the initial buttons are there
+    renderButtons();
 
 });//end document ready function

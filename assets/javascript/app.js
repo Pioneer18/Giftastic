@@ -6,7 +6,7 @@ $(document).ready(function(){
     //the api key is unique to my app; Giftastic
     var apiKey = "api_key=G1kFHGB32srmgFFlZw45yLkE1H0HFmuy";
     //the search term should be a variable bound to the user input
-    var searchTerm = "dogs";
+    var searchTerm = "cat";
     //the number of records  the api will bring back
     var limit = "25"
     //rating parameter filters the gifs by rating; keep it G
@@ -17,6 +17,15 @@ $(document).ready(function(){
     //now assemble the above parameters into a single query url
     var queryURL = url + apiKey + "&q=" + searchTerm + "&limit" + limit +
     "&offset=0&rating=" + rating + "&lang=" + language;
+
+    //make an array to hold the topics ('strings') to be passed to the ajax queryURL
+    var topics = ["cats","space","coding","coffe","dogs","sloth","adventure time"];
+    //loop through the topics and generate the buttons that will make the ajax calls
+    for(let i =0; i < topics.length; i++){
+        var x = $("<button>").attr("data-name", topics[i]).addClass("gif-button");
+        console.log(x);
+    }
+
 
     //make the jquery ajax call to the giphy api
     $.ajax({
@@ -34,7 +43,7 @@ $(document).ready(function(){
         //pull the data; start by looping all the gifs; a <div class="col"> will be constructed for each gif
         for(var i = 0; i < response.data.length; i++){
             //make the column to hold the gif images
-            var gifHolder = $("<div>").addClass("col-sm");
+            var gifHolder = $("<div>").addClass("col-sm-8");
             //make a variable to hold the basic dig into the api object(less code to type on each following variable)
             var pull = response.data[i];
             //pull the title
@@ -50,8 +59,6 @@ $(document).ready(function(){
             //make an img tag with src= to the gif url and .gif to be target by an onclick function
             //need to add a preFACE url so that the like loads from giphy and not my local index file
             var gif = $("<img>").attr("src", gStill).attr("data-animated",gAnimated).attr("data-still",gStill).attr("data-state","still").addClass("gif");
-            console.log(gif);
-            console.log(gif[0].baseURI);
             //put the gif into the column
             $(gifHolder).append(gif);
             //put the column into the row #display

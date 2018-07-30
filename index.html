@@ -12,16 +12,23 @@
     <title>Giftastic</title>
   </head>
   <body>
+      <header> <!--header-->
+        <div class="navbar navbar-expand-sm border-bottom mb-1"><!--BS4 navbar stacks for sm screens border on bottom (may need custom cs to size border thickness-->
+            <div class="container"><!--container fixed width 960px min yet responsive-->
+                <a class="navbar-brand" href="#">Giftastic</a><!--logo tag-->
+                <form id="search-spot">
+                    <input type="text" placeholder="search for gifs" name="gif-search-box" id="search-box">
+                    <!--put it in a form so the user can press enter-->
+                    <input type="submit" id="add-gif" value="add gif category">
+                </form>
+            </div>    
+        </div>
+      </header>
     <div class="container">
         <!--make a row for the search box at the top for now-->
-        <div class="row justify-content-sm-left">
-          <form id="search-spot">
-          <!--put it in a form so the user can press enter-->
-          <input type="submit" id="add-gif" value="add gif category">
-          </form>
-        </div>
+  
         <!--for now render buttons at top of the page in a row-->
-        <div class="row" id="button-spot">
+        <div class="row mb-2 border" id="button-spot">
           <!--buttons show up here; hopefully-->
         </div>
         <div class="row" id="display">

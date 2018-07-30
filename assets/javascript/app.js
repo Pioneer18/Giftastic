@@ -12,8 +12,8 @@ $(document).ready(function(){
     var _rating;
     var _language;
     //make a search bar (input)
-    var searchBar = $("<input>").attr({type:"text",placeholder:"search for gifs",name:"gif-search-box",id:"search-box"}).addClass("col-sm-6");
-    $("#search-spot").append(searchBar);
+    //var searchBar = $("<input>").attr({type:"text",placeholder:"search for gifs",name:"gif-search-box",id:"search-box"}).addClass("col-sm-6");
+    //$("#search-spot").append(searchBar);
 
     //make an array to hold the topics ('strings') to be passed to the ajax queryURL
     var topics = ["cats","space","coding","coffe","dogs","sloth","adventure time"];
@@ -29,7 +29,7 @@ $(document).ready(function(){
         }
     }
 
-    //function to grab user input and add it as a topic in the topics array
+    //function to grab user input and add it as a topic in the topics array when user clicks the add gif button
     //the user can press enter or they will click the `add gif category` button
     $("#add-gif").on("click",function(){
         //remeber to add the event.preventDefault() function to prevent the form from trying to submit itself
@@ -37,18 +37,17 @@ $(document).ready(function(){
         //make a variable called topic to bind to the user input value and then trim() the extra whitespace from the
         //start and end of the inputed string
         var topic = $("#search-box").val().trim();
-        console.log(topic);
-        //push this value to the topic array
+        //push the value to the topics array
         topics.push(topic);
         //call the functon to create the new gif button and add it to the button spot
-        console.log(topics);
         renderButtons();
+        //clear the input box again
     });
     
 
     //make an onclick event for the class of .gif-button that will bind the api query parameters to the queryURL
     //to the data-name value of the clicked button
-    $(".gif-button").on("click", function(){
+    $(document).on("click",".gif-button", function(){
         //grab the attribute of `this` (the clicked button) event and reasign global variable searchTerm
         searchTerm = $(this).attr("data-name");
         console.log(searchTerm);
@@ -57,6 +56,7 @@ $(document).ready(function(){
         //later make it so that globaly defined variables are set as the parameters of the ajax call (the global variables are bound to user input)
         ajaxCall();
     }); 
+
 
     //function to call the ajax with parameters
     //user must choose the search term; optionally user may choose the limit, rating, and language, however they have defaults
@@ -80,13 +80,14 @@ $(document).ready(function(){
             //pull the data; start by looping all the gifs; a <div class="col"> will be constructed for each gif
             for(var i = 0; i < response.data.length; i++){
                 //make the column to hold the gif images
-                var gifHolder = $("<div>").addClass("col-sm");
+                var gifHolder = $("<div>").addClass("col-sm").attr("id","gif-holder");
                 //make a variable to hold the basic dig into the api object(less code to type on each following variable)
                 var pull = response.data[i];
                 //pull the title
-                var gTitle = pull.title;
+                var gTitle = $("<h6>").text(pull.title);
                 //pull the rating of the gif
                 var gRating = pull.rating;
+                gTitle.append(" (rated: " + gRating + ")");
                 //pull the fixed_width_still url of each record (each gif has fixed width of 200px yet varying heights)
                 var gStill = pull.images.fixed_width_still.url;
                 //pull the animated version
@@ -97,9 +98,9 @@ $(document).ready(function(){
                 //need to add a preFACE url so that the like loads from giphy and not my local index file
                 var gif = $("<img>").attr("src", gStill).attr("data-animated",gAnimated).attr("data-still",gStill).attr("data-state","still").addClass("gif");
                 //put the gif into the column
-                $(gifHolder).append(gif);
+                $(gifHolder).append(gTitle).append(gif);
                 //put the column into the row #display
-                $("#display").append(gifHolder);
+                $("#display").prepend(gifHolder);
 
             }//end loop through records
 

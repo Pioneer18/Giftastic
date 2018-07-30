@@ -2,7 +2,7 @@ $(document).ready(function(){
     //test the api call
     //build api call
     //the url is the base url needed to access giphy api (this is global and not to be selected by user)
-    var url = "http://api.giphy.com/v1/gifs/search?";
+    var url = "https://api.giphy.com/v1/gifs/search?";
     //the api key is unique to my app; Giftastic (this is global and not to be selected by the user)
     var apiKey = "api_key=G1kFHGB32srmgFFlZw45yLkE1H0HFmuy";
     //will be bound to the data-name attribute of the clicked button

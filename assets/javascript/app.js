@@ -16,7 +16,7 @@ $(document).ready(function(){
     //$("#search-spot").append(searchBar);
 
     //make an array to hold the topics ('strings') to be passed to the ajax queryURL
-    var topics = ["cats","space","coding","coffe","dogs","sloth","adventure time"];
+    var topics = ["cats","puppies","sponge bob","coffe","sloth","adventure time"];
 
     //make the function to render buttons from the items in the topics array
     function renderButtons () {
@@ -70,6 +70,7 @@ $(document).ready(function(){
             method:"GET"
         }).then(function(response){
             //this pulls 25 records on the parameters
+            console.log('======================== Response Data ========================');
             console.log(response.data);
             // 1) extract; response.data.(title,rating,fixed_width_still,fixed_width(animated version))
             // 2) build a col with a fixed width of 200 pixels and gutter of 20px, to make 20px between each gif

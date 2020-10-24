@@ -51,6 +51,7 @@ $(document).ready(function(){
         //grab the attribute of `this` (the clicked button) event and reasign global variable searchTerm
         searchTerm = $(this).attr("data-name");
         console.log(searchTerm);
+        $("#about-box").hide();
         //now call the ajax and pass the searchTerm to it
         //the ajax should be able to acsses searchTerm since it is nested in the button click
         //later make it so that globaly defined variables are set as the parameters of the ajax call (the global variables are bound to user input)
